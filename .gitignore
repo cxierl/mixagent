@@ -1,0 +1,7 @@
+node_modules/
+dist/
+tmp_inline_check.js
+_tmp_inline_check.js/
+*.log
+Thumbs.db
+.DS_Store

@@ -1,0 +1,43 @@
+{
+  "name": "mixagent-desktop",
+  "version": "0.1.2",
+  "private": true,
+  "main": "electron/main.js",
+  "description": "MixAgent desktop wrapper",
+  "scripts": {
+    "desktop": "electron .",
+    "desktop:dev": "electron . --dev",
+    "desktop:pack": "electron-builder --win nsis"
+  },
+  "build": {
+    "appId": "com.mixagent.desktop",
+    "productName": "MixAgent",
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "cxierl",
+        "repo": "mixagent"
+      }
+    ],
+    "electronUpdaterCompatibility": ">=2.16",
+    "files": [
+      "index.html",
+      "electron/**/*",
+      "CHANGELOG.md",
+      "README.md",
+      "ROADMAP.md"
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    }
+  },
+  "dependencies": {
+    "electron-updater": "^6.6.2"
+  },
+  "devDependencies": {
+    "electron": "^37.2.0",
+    "electron-builder": "^26.0.12"
+  }
+}
