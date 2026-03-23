@@ -1,6 +1,6 @@
 {
   "name": "mixagent-desktop",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "private": true,
   "main": "electron/main.js",
   "description": "MixAgent desktop wrapper",
@@ -16,7 +16,8 @@
       {
         "provider": "github",
         "owner": "cxierl",
-        "repo": "mixagent"
+        "repo": "mixagent",
+        "private": true
       }
     ],
     "electronUpdaterCompatibility": ">=2.16",

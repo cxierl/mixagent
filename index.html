@@ -787,9 +787,7 @@ button,input,select,textarea{font-size:14px}
   </div>
   <div class="ctrl-row">
     <div class="composer-icons">
-        <button class="icon-lite" title="本次命令产物模式" onclick="openArtifactModeMenu(this,event)">＋</button>
         <button class="icon-lite" title="发言设置" onclick="openSpeakModeMenu(this,event)">☰</button>
-        <span class="artifact-mode-badge" id="artifactModeBadge">快速文本</span>
     </div>
     <button class="btn pau" id="btnPause" onclick="togglePause()" style="display:none">⏸ 暂停</button>
     <button class="btn" id="btnCont" onclick="continueRound()" disabled>→ 继续</button>
@@ -877,14 +875,13 @@ button,input,select,textarea{font-size:14px}
               <div class="studio-pane-title">模型列表</div>
               <button class="btn pri" onclick="newStudioModel()">新建模型</button>
             </div>
-            <div class="studio-mini-meta" id="studioModelListMeta">选中左侧模型，右侧直接修改连接信息与 API Key。</div>
             <div id="modelCards"></div>
           </div>
           <div class="studio-config studio-scroll">
             <div class="studio-detail-head">
               <div>
                 <div class="studio-detail-title">模型配置</div>
-                <div class="studio-detail-sub">左侧只显示模型名称，右侧直接编辑连接信息与 API Key。连接配置会自动复用到共享服务层，更新后不会清空你已有的 Key。</div>
+                <div class="studio-detail-sub">只保留必要字段：名称、格式、Base URL、Model ID、API Key。</div>
               </div>
             </div>
             <input type="hidden" id="mEditId">
@@ -897,16 +894,13 @@ button,input,select,textarea{font-size:14px}
             </div>
             <div class="studio-inline-actions" style="margin-top:12px">
               <button class="btn pri" onclick="addModel()" id="mSaveBtn">保存修改</button>
-              <button class="btn" onclick="duplicateStudioModel()" id="mCloneBtn">复制当前配置新建</button>
+              <button class="btn" onclick="matchModelsByApiKey(this,event)" id="mMatchBtn">匹配模型</button>
+              <button class="btn" onclick="openOpenAIAccount()">OpenAI 登录</button>
               <button class="btn" onclick="testMC()" id="mTestBtn">测试</button>
               <button class="btn" onclick="delModel()" id="mDeleteBtn" style="display:none">删除模型</button>
             </div>
             <div class="studio-stack" style="margin-top:12px">
-              <div>
-                <div class="studio-pane-title" style="margin-bottom:8px">常用预设</div>
-                <div class="studio-chip-list" id="recommendedModels"></div>
-              </div>
-              <div id="studioModelEditorMeta" class="studio-mini-meta">连接字段可以复用，新增模型时只改名称和 Model ID 即可。</div>
+              <div id="studioModelEditorMeta" class="studio-mini-meta">提示：OpenAI OAuth 登录仅用于打开平台页面，API 调用仍需要平台 API Key。</div>
               <div id="studioModelTestResult" class="studio-empty" style="padding:0"></div>
             </div>
           </div>
@@ -1181,8 +1175,13 @@ const COLORS=[
   {hex:'#e03850',bg:'#280810',txt:'#ff8898'},{hex:'#d08020',bg:'#281604',txt:'#ffb850'},
   {hex:'#8838d0',bg:'#180830',txt:'#c880ff'},{hex:'#18a8d0',bg:'#061820',txt:'#60d8f8'},
 ];
-const APP_VERSION='0.1.3';
+const APP_VERSION='0.1.4';
 const UPDATE_NOTES={
+  '0.1.4':[
+    '模型页去冗余：移除常用预设和重复说明，保留核心配置字段。',
+    '新增“匹配模型”：可按当前 Base URL + API Key 拉取可用模型并一键填入 Model ID。',
+    '发言菜单升级：简单/高级模式带解释并可直达对应配置，同时合并产物模式入口到三条杠菜单。'
+  ],
   '0.1.3':[
     '修复私有仓库自动更新：支持在应用内配置 GitHub Token（repo 权限）。',
     '修复更新错误泄露请求头问题：更新错误消息已做敏感信息脱敏。',
@@ -2696,6 +2695,71 @@ async function testModel(m){
     return{ok:false,err:'未知格式'};
   }catch(e){return{ok:false,err:e.message};}
 }
+function openOpenAIAccount(){
+  window.open('https://platform.openai.com/settings/organization/api-keys','_blank','noopener');
+  appendSysMsg('已打开 OpenAI 平台。说明：ChatGPT Pro 账号不能直接替代 API Key，调用 API 仍需平台 API Key。');
+}
+function normalizeModelCandidate(mid){
+  const id=String(mid||'').trim();
+  if(!id)return'';
+  return id.replace(/^models\//,'');
+}
+function scoreModelCandidate(id){
+  const v=String(id||'').toLowerCase();
+  let s=0;
+  if(/chat|gpt|claude|gemini|deepseek|reasoner/.test(v))s+=3;
+  if(/-latest|preview|mini|flash/.test(v))s+=1;
+  if(/embedding|tts|audio|image|vision/.test(v))s-=4;
+  return s;
+}
+function applyMatchedModelId(mid){
+  document.getElementById('mId').value=normalizeModelCandidate(mid);
+  document.getElementById('cdrop').style.display='none';
+}
+async function matchModelsByApiKey(btn,ev){
+  ev?.stopPropagation();
+  const fmt=(document.getElementById('mFmt')?.value||'openai').trim();
+  const base=normBaseUrl((document.getElementById('mUrl')?.value||'').trim());
+  const key=(document.getElementById('mKey')?.value||'').trim();
+  const testEl=document.getElementById('studioModelTestResult');
+  if(!base||!key){
+    if(testEl){testEl.className='studio-empty studio-test-fail';testEl.textContent='请先填写 Base URL 和 API Key。';}
+    return;
+  }
+  if(testEl){testEl.className='studio-empty';testEl.textContent='正在匹配可用模型...';}
+  try{
+    let ids=[];
+    if(fmt==='openai'){
+      const r=await fetch(`${base}/models`,{headers:{'Authorization':`Bearer ${key}`}});
+      if(!r.ok)throw new Error(`HTTP ${r.status}`);
+      const j=await r.json();
+      ids=(j.data||[]).map(x=>normalizeModelCandidate(x?.id)).filter(Boolean);
+    }else if(fmt==='anthropic'){
+      const r=await fetch(`${base}/v1/models`,{headers:{'x-api-key':key,'anthropic-version':'2023-06-01'}});
+      if(!r.ok)throw new Error(`HTTP ${r.status}`);
+      const j=await r.json();
+      ids=(j.data||[]).map(x=>normalizeModelCandidate(x?.id)).filter(Boolean);
+    }else if(fmt==='gemini'){
+      const r=await fetch(`${base}/models?key=${encodeURIComponent(key)}`);
+      if(!r.ok)throw new Error(`HTTP ${r.status}`);
+      const j=await r.json();
+      ids=(j.models||[]).map(x=>normalizeModelCandidate(x?.name||x?.id)).filter(Boolean);
+    }
+    ids=[...new Set(ids)].sort((a,b)=>scoreModelCandidate(b)-scoreModelCandidate(a)||a.localeCompare(b,'zh-CN'));
+    if(!ids.length)throw new Error('未返回可用模型');
+    if(testEl){testEl.className='studio-empty studio-test-ok';testEl.textContent=`已匹配 ${ids.length} 个模型，点击选择。`;}
+    const drop=document.getElementById('cdrop');
+    drop.dataset.mode='match-model';
+    drop.dataset.key='model';
+    drop.innerHTML=ids.slice(0,40).map(id=>`<button class="cdrop-item" onclick="applyMatchedModelId('${id.replace(/'/g,"\\'")}')">${id}</button>`).join('');
+    const r=btn?.getBoundingClientRect?.()||{left:0,bottom:0};
+    drop.style.top=(r.bottom+4)+'px';
+    drop.style.left=r.left+'px';
+    drop.style.display='flex';
+  }catch(e){
+    if(testEl){testEl.className='studio-empty studio-test-fail';testEl.textContent=`匹配失败：${e.message}`;}
+  }
+}
 
 function getCtx(agent){
   const strat=document.getElementById('ctxStrat').value;
@@ -3119,15 +3183,24 @@ function openSpeakModeMenu(btn,ev){
   drop.dataset.mode='speak';
   drop.dataset.key='speak';
   const simpleOn=!!document.getElementById('simpleMode')?.checked;
-  drop.innerHTML=`<button class="cdrop-item" onclick="setSpeakMode('simple')">${simpleOn?'✅ ':''}简单模式</button><button class="cdrop-item" onclick="setSpeakMode('advanced')">${simpleOn?'':'✅ '}高级模式</button>`;
+  drop.innerHTML=[
+    `<button class="cdrop-item" onclick="setSpeakMode('simple',true)">${simpleOn?'✅ ':''}简单模式<div style="font-size:11px;color:var(--tx2);margin-top:2px">主持人发出“会议最终闭环宣告”即结束。</div></button>`,
+    `<button class="cdrop-item" onclick="setSpeakMode('advanced',true)">${simpleOn?'':'✅ '}高级模式<div style="font-size:11px;color:var(--tx2);margin-top:2px">直接展开高级设置，配置轮次、顺序和讨论策略。</div></button>`,
+    '<div class="divider"></div>',
+    '<button class="cdrop-item" onclick="openArtifactModeMenu(this,event)">本次产物模式<div style="font-size:11px;color:var(--tx2);margin-top:2px">快速文本 / 单文件 / 多文件 / 工程文件</div></button>'
+  ].join('');
   const r=btn.getBoundingClientRect();
-  drop.style.top=Math.max(6,r.top-78)+'px';
+  drop.style.top=Math.max(6,r.top-188)+'px';
   drop.style.left=r.left+'px';
   drop.style.display='flex';
 }
-function setSpeakMode(mode){
+function setSpeakMode(mode,openConfig){
   if(mode==='simple')onSimpleModeChange(true);
   else onSimpleModeChange(false);
+  if(openConfig){
+    if(mode==='advanced')toggleAdv(true);
+    else toggleAdv(false);
+  }
   document.getElementById('cdrop').style.display='none';
 }
 
@@ -3640,9 +3713,9 @@ function switchMode(m){
   refreshTopicViews();
 }
 
-function toggleAdv(){
+function toggleAdv(forceOpen){
   const p=document.getElementById('advPanel');
-  const open=p.style.display!=='none';
+  const open=(typeof forceOpen==='boolean')?!forceOpen:(p.style.display!=='none');
   p.style.display=open?'none':'flex';
   document.getElementById('advToggle').textContent=open?'⚙ 高级设置 ▸':'⚙ 高级设置 ▾';
 }
