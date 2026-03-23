@@ -206,8 +206,55 @@ input::placeholder,textarea::placeholder{color:var(--tx3)}
 .mtab{padding:3px 12px;border-radius:4px;font-size:12px;background:transparent;color:var(--tx1);font-weight:500}
 .mtab.on{background:var(--bg3);color:var(--tx0)}.mtab:hover:not(.on){background:var(--bg2)}
 .mdesc{font-size:11px;color:var(--tx2)}
-/* simplified rules */
-.rules-row{padding:6px 12px;display:flex;align-items:flex-start;gap:10px;border-bottom:1px solid var(--bd);flex-wrap:wrap}
+/* workflow dock */
+.workflow-dock{display:none;padding:10px 12px 0}
+.workflow-dock.on{display:block;animation:fin .18s ease}
+.workflow-shell{display:grid;grid-template-columns:minmax(240px,280px) minmax(0,1fr);border:1px solid var(--bd);border-radius:16px;background:linear-gradient(180deg,rgba(22,33,52,.98),rgba(12,19,32,.98));box-shadow:0 18px 50px rgba(0,0,0,.28);overflow:hidden}
+.workflow-intro{padding:18px 18px 16px;border-right:1px solid var(--bd);background:linear-gradient(180deg,rgba(28,42,66,.92),rgba(15,23,38,.96));display:flex;flex-direction:column;gap:12px}
+.workflow-kicker{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--tx2)}
+.workflow-title{font-size:18px;font-weight:800;line-height:1.2;color:var(--tx0)}
+.workflow-lead{font-size:12px;line-height:1.75;color:var(--tx1)}
+.workflow-brief-list{display:flex;flex-direction:column;gap:8px}
+.workflow-brief-card{padding:12px 13px;border:1px solid var(--bd2);border-radius:12px;background:rgba(13,23,38,.55);transition:border-color .14s ease,background .14s ease,transform .14s ease}
+.workflow-brief-card.clickable{cursor:pointer}
+.workflow-brief-card.clickable:hover{border-color:var(--bd3);transform:translateY(-1px)}
+.workflow-brief-card.on{border-color:var(--acc);background:rgba(20,43,77,.72);box-shadow:0 0 0 1px rgba(59,130,246,.16)}
+.workflow-brief-label{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:13px;font-weight:700;color:var(--tx0)}
+.workflow-brief-desc{margin-top:4px;font-size:11px;line-height:1.65;color:var(--tx2)}
+.workflow-brief-meta{margin-top:auto;padding-top:6px;font-size:11px;line-height:1.75;color:var(--tx2)}
+.workflow-config{padding:12px 14px 14px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.workflow-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;padding:2px 2px 8px}
+.workflow-head-copy{display:flex;flex-direction:column;gap:3px}
+.workflow-head-title{font-size:16px;font-weight:800;color:var(--tx0)}
+.workflow-head-sub{font-size:12px;line-height:1.7;color:var(--tx2)}
+.workflow-summary-pill{padding:6px 10px;border-radius:999px;border:1px solid var(--bd2);background:var(--bg2);font-size:11px;color:var(--tx1);white-space:nowrap}
+.workflow-table{display:flex;flex-direction:column;border:1px solid var(--bd);border-radius:14px;background:rgba(10,17,29,.35);overflow:hidden}
+.wf-row{display:grid;grid-template-columns:156px 220px minmax(0,1fr);gap:12px;padding:12px 14px;border-bottom:1px solid rgba(47,67,102,.72);align-items:flex-start}
+.wf-row:last-child{border-bottom:none}
+.wf-cell-label{font-size:12px;font-weight:700;color:var(--tx0);padding-top:3px}
+.wf-cell-desc{font-size:11px;line-height:1.65;color:var(--tx2)}
+.wf-cell-control{display:flex;flex-wrap:wrap;gap:8px;align-items:center;min-width:0}
+.wf-inline-pair{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.wf-seg{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--bd);border-radius:10px;background:var(--bg0)}
+.wf-seg button{padding:7px 12px;border-radius:8px;background:transparent;color:var(--tx1);border:1px solid transparent;font-size:12px;font-weight:700}
+.wf-seg button.on{background:var(--bg3);border-color:var(--bd2);color:var(--tx0)}
+.wf-chip-group{display:flex;flex-wrap:wrap;gap:8px}
+.wf-chip{display:flex;flex-direction:column;gap:2px;min-width:120px;padding:9px 11px;border-radius:12px;border:1px solid var(--bd2);background:var(--bg2);color:var(--tx1);text-align:left}
+.wf-chip:hover{border-color:var(--bd3);color:var(--tx0)}
+.wf-chip.on{border-color:var(--acc);background:rgba(20,43,77,.72);color:var(--tx0)}
+.wf-chip-title{font-size:12px;font-weight:700}
+.wf-chip-desc{font-size:10px;line-height:1.45;color:var(--tx2)}
+.wf-stat{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border-radius:9px;background:var(--bg2);border:1px solid var(--bd);font-size:11px;color:var(--tx2)}
+.wf-note{font-size:10px;line-height:1.55;color:var(--tx3)}
+.wf-row .rsel,.wf-row .rnum{min-height:34px}
+.wf-row .rnum{width:72px}
+.wf-row-complex.is-hidden,.wf-row.is-hidden{display:none!important}
+.workflow-launch{display:inline-flex;align-items:center;gap:10px;padding:7px 12px;border-radius:12px;background:linear-gradient(180deg,rgba(28,42,66,.95),rgba(18,28,46,.98));border:1px solid var(--bd2);color:var(--tx0);min-width:188px}
+.workflow-launch:hover{border-color:var(--bd3);background:linear-gradient(180deg,rgba(33,50,78,.98),rgba(20,31,52,.98))}
+.workflow-launch-icon{width:26px;height:26px;border-radius:8px;background:var(--bg3);border:1px solid var(--bd2);display:inline-flex;align-items:center;justify-content:center;font-size:13px;color:var(--tx1);flex-shrink:0}
+.workflow-launch-copy{display:flex;flex-direction:column;align-items:flex-start;gap:1px;min-width:0}
+.workflow-launch-title{font-size:12px;font-weight:700;color:var(--tx0)}
+.workflow-launch-meta{font-size:10px;color:var(--tx2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:170px}
 .rlg{display:flex;align-items:center;gap:5px}
 .rlg-col{display:flex;flex-direction:column;gap:3px;min-width:260px;max-width:420px}
 .rl{font-size:11px;color:var(--tx2);white-space:nowrap}
@@ -338,6 +385,11 @@ input::placeholder,textarea::placeholder{color:var(--tx3)}
 .perm-opt{display:inline-flex;align-items:center;gap:6px;padding:5px 9px;border-radius:var(--r6);border:1px solid var(--bd2);background:var(--bg3);font-size:12px;color:var(--tx1)}
 .perm-opt input{accent-color:var(--acc)}
 .sys-fab.dragging,.sys-panel.dragging{transition:none;cursor:grabbing}
+@media (max-width:1100px){
+  .workflow-shell{grid-template-columns:1fr}
+  .workflow-intro{border-right:none;border-bottom:1px solid var(--bd)}
+  .wf-row{grid-template-columns:1fr}
+}
 
 /* TYPE SCALE (raised for readability) */
 html,body{font-size:14px}
@@ -692,93 +744,159 @@ button,input,select,textarea{font-size:14px}
     <span id="activeFileBadge" style="font-size:11px;color:var(--tx2)"></span>
   </div>
 
-  <div class="rules-row">
-    <div class="rlg-col">
-      <div class="rlg">
-        <span class="rl">简单模式</span>
-        <label class="rtoggle"><input type="checkbox" id="simpleMode" checked onchange="onSimpleModeChange()">直到主持人闭环结束</label>
+  <div class="workflow-dock" id="workflowDock">
+    <input type="checkbox" id="simpleMode" hidden onchange="onSimpleModeChange()">
+    <div class="workflow-shell">
+      <div class="workflow-intro">
+        <div class="workflow-kicker">Workflow</div>
+        <div class="workflow-title">讨论策略与产物在这里一次配清。</div>
+        <div class="workflow-lead">左边负责解释当前模式与结果形态，右边直接改值。设置中心里的发言策略不再作为第二入口，避免两处配置打架。</div>
+        <div class="workflow-brief-list">
+          <div class="workflow-brief-card clickable" id="wfModeSimple" onclick="setWorkflowMode('simple')">
+            <div class="workflow-brief-label"><span>简单模式</span><span class="wf-stat">主持人闭环即结束</span></div>
+            <div class="workflow-brief-desc">适合先真实体验对话过程，不强加轮次上限，只看主持人是否明确发出“会议最终闭环宣告”。</div>
+          </div>
+          <div class="workflow-brief-card clickable" id="wfModeAdvanced" onclick="setWorkflowMode('advanced')">
+            <div class="workflow-brief-label"><span>高级模式</span><span class="wf-stat">轮次、顺序、记忆全可控</span></div>
+            <div class="workflow-brief-desc">适合需要稳定产出、严格推进和长期复盘的任务。可控制每个话题与整场讨论的最少/最多轮次。</div>
+          </div>
+          <div class="workflow-brief-card" id="wfArtifactCard">
+            <div class="workflow-brief-label"><span>本次产物</span><span class="wf-stat" id="workflowArtifactBrief">快速文本</span></div>
+            <div class="workflow-brief-desc">这次命令只决定最终产物形态，不改变团队结构。命令发送后会自动回到默认“快速文本”。</div>
+          </div>
+        </div>
+        <div class="workflow-brief-meta" id="workflowBriefMeta">当前策略将写入项目快照与团队快照，更新后仍可恢复。</div>
       </div>
-      <div class="rnote">开：是否结束只看主持人是否发出“会议最终闭环宣告”。关：改用高级设置中的最少/最多轮次与顺序控制。</div>
-    </div>
-    <span class="sp"></span>
-    <button class="adv-toggle" onclick="toggleAdv()" id="advToggle">⚙ 高级设置 ▸</button>
-  </div>
-
-  <div class="adv-panel" id="advPanel" style="display:none">
-    <div class="adv-item">
-      <div class="rlg"><span class="rl">发言策略</span>
-        <select class="rsel" id="turnStrat" onchange="onTurnStrategyChange()">
-          <option value="seq">顺序轮转</option>
-          <option value="mod">主持人点名</option>
-          <option value="bid">发言最少先</option>
-          <option value="all">全员同时</option>
-          <option value="custom">自定义顺序</option>
-        </select>
+      <div class="workflow-config">
+        <div class="workflow-head">
+          <div class="workflow-head-copy">
+            <div class="workflow-head-title">详细配置</div>
+            <div class="workflow-head-sub">右侧按表格形式整理：模式、产物、轮次、顺序、上下文与摘要策略全都在同一处。</div>
+          </div>
+          <div class="workflow-summary-pill" id="workflowSummaryPill">简单模式 · 快速文本</div>
+        </div>
+        <div class="workflow-table">
+          <div class="wf-row">
+            <div class="wf-cell-label">讨论模式</div>
+            <div class="wf-cell-desc">决定结束条件与可见配置范围。简单模式只有一个结束条件；高级模式会开放全部过程控制。</div>
+            <div class="wf-cell-control">
+              <div class="wf-seg">
+                <button type="button" id="wfModeSimpleBtn" onclick="setWorkflowMode('simple')">简单模式</button>
+                <button type="button" id="wfModeAdvancedBtn" onclick="setWorkflowMode('advanced')">高级模式</button>
+              </div>
+            </div>
+          </div>
+          <div class="wf-row">
+            <div class="wf-cell-label">本次产物</div>
+            <div class="wf-cell-desc">这次命令的交付形态。默认快速文本；如果要形成报告、设定包或工程目录，就在发送前切换。</div>
+            <div class="wf-cell-control">
+              <div class="wf-chip-group">
+                <button type="button" class="wf-chip" id="artifactMode-quick_text" onclick="setPendingArtifactMode('quick_text')"><span class="wf-chip-title">快速文本</span><span class="wf-chip-desc">一句结论、简短答复、即时可复制</span></button>
+                <button type="button" class="wf-chip" id="artifactMode-single_file" onclick="setPendingArtifactMode('single_file')"><span class="wf-chip-title">单文件</span><span class="wf-chip-desc">生成一份报告、方案或长文主文件</span></button>
+                <button type="button" class="wf-chip" id="artifactMode-multi_file" onclick="setPendingArtifactMode('multi_file')"><span class="wf-chip-title">多文件</span><span class="wf-chip-desc">拆成多个成果文件，便于分层查看</span></button>
+                <button type="button" class="wf-chip" id="artifactMode-project_file" onclick="setPendingArtifactMode('project_file')"><span class="wf-chip-title">工程文件</span><span class="wf-chip-desc">创建工程目录，适合长篇和复杂项目</span></button>
+              </div>
+            </div>
+          </div>
+          <div class="wf-row">
+            <div class="wf-cell-label">发言顺序</div>
+            <div class="wf-cell-desc">控制每一轮谁先说、谁后说。越靠右越灵活，但也更依赖主持人的控制能力。</div>
+            <div class="wf-cell-control">
+              <select class="rsel" id="turnStrat" onchange="onTurnStrategyChange()">
+                <option value="seq">顺序轮转</option>
+                <option value="mod">主持人点名</option>
+                <option value="bid">发言最少先</option>
+                <option value="all">全员同时</option>
+                <option value="custom">自定义顺序</option>
+              </select>
+              <span class="wf-note" id="turnStratLabel"></span>
+            </div>
+          </div>
+          <div class="wf-row is-hidden" id="customOrderWrap">
+            <div class="wf-cell-label">自定义顺序</div>
+            <div class="wf-cell-desc">适合需要同一智能体在一个回合多次发言的场景。支持添加发言位、拖动排序和删除位次。</div>
+            <div class="wf-cell-control" style="flex-direction:column;align-items:stretch">
+              <div class="wf-inline-pair">
+                <select class="rsel" id="customAgentSel"></select>
+                <button class="abtn" onclick="addCustomOrderFromSelect()">+ 添加发言位</button>
+                <button class="abtn" onclick="clearCustomOrder()">清空顺序</button>
+              </div>
+              <div class="co-list" id="customOrderList"></div>
+            </div>
+          </div>
+          <div class="wf-row wf-row-complex" id="workflowTopicRow">
+            <div class="wf-cell-label">话题轮次</div>
+            <div class="wf-cell-desc">控制单个话题至少讨论多少轮、最多多少轮。主持人想提前闭环，也必须先满足最少轮次。</div>
+            <div class="wf-cell-control">
+              <span class="wf-stat">最少轮次</span><input class="rnum" type="number" id="wfTopicMin" min="1" max="99" onchange="saveWorkflowConfigFromEditor()">
+              <span class="wf-stat">最多轮次</span><input class="rnum" type="number" id="wfTopicMax" min="1" max="99" onchange="saveWorkflowConfigFromEditor()">
+            </div>
+          </div>
+          <div class="wf-row wf-row-complex" id="workflowTotalRow">
+            <div class="wf-cell-label">整场轮次</div>
+            <div class="wf-cell-desc">给整场讨论一个总兜底区间，防止长期空转。更适合复杂项目或多人争议较多的任务。</div>
+            <div class="wf-cell-control">
+              <span class="wf-stat">最少轮次</span><input class="rnum" type="number" id="wfTotalMin" min="1" max="199" onchange="saveWorkflowConfigFromEditor()">
+              <span class="wf-stat">最多轮次</span><input class="rnum" type="number" id="wfTotalMax" min="1" max="199" onchange="saveWorkflowConfigFromEditor()">
+            </div>
+          </div>
+          <div class="wf-row wf-row-complex" id="roundModeWrap">
+            <div class="wf-cell-label">轮次结束判断</div>
+            <div class="wf-cell-desc">固定轮次更可预测；直到统一会持续检查共识。两者都受上面的最少/最多轮次约束。</div>
+            <div class="wf-cell-control">
+              <select class="rsel" id="roundMode" onchange="onRoundModeChange()">
+                <option value="fixed">固定轮次</option>
+                <option value="until_consensus">直到统一</option>
+              </select>
+              <div class="wf-inline-pair is-hidden" id="roundFixedWrap">
+                <span class="wf-stat">固定轮次</span><input class="rnum" type="number" id="roundsN" value="1" min="1" max="120">
+              </div>
+              <div class="wf-inline-pair is-hidden" id="roundCapWrap">
+                <span class="wf-stat">统一上限</span><input class="rnum" type="number" id="roundCap" value="12" min="1" max="500">
+              </div>
+            </div>
+          </div>
+          <div class="wf-row">
+            <div class="wf-cell-label">讨论风格</div>
+            <div class="wf-cell-desc">决定角色发言是更偏对抗论证，还是更偏发散生成。对最终成文风格影响明显。</div>
+            <div class="wf-cell-control">
+              <select class="rsel" id="discMode" onchange="setWorkflowDiscMode(this.value)">
+                <option value="debate">辩论</option>
+                <option value="brainstorm">头脑风暴</option>
+                <option value="free">自由</option>
+              </select>
+            </div>
+          </div>
+          <div class="wf-row">
+            <div class="wf-cell-label">上下文策略</div>
+            <div class="wf-cell-desc">控制发言时带入多少历史。完整历史信息最全，滑动窗口更省 token，摘要压缩在两者之间取平衡。</div>
+            <div class="wf-cell-control">
+              <select class="rsel" id="ctxStrat" onchange="onInlineMetaChange()">
+                <option value="sliding">滑动窗口</option>
+                <option value="summary">摘要压缩</option>
+                <option value="full">完整历史</option>
+              </select>
+              <div class="wf-inline-pair" id="ctxWinAdvWrap">
+                <span class="wf-stat">窗口大小</span><input class="rnum" type="number" id="ctxWin" value="10" min="3" max="40" onchange="onInlineMetaChange()">
+              </div>
+            </div>
+          </div>
+          <div class="wf-row">
+            <div class="wf-cell-label">摘要策略</div>
+            <div class="wf-cell-desc">决定系统何时自动提炼当前共识、分歧和下一步。话题结束自动适合长会话，每 N 轮适合持续追踪。</div>
+            <div class="wf-cell-control">
+              <select class="rsel" id="sumAutoMode" onchange="onSumAutoModeChange();onInlineMetaChange()">
+                <option value="manual">手动</option>
+                <option value="rounds">每 N 轮自动</option>
+                <option value="topic_end">话题结束自动</option>
+              </select>
+              <span id="sumEveryWrap" style="display:none;align-items:center;gap:6px">
+                <span class="wf-stat">每</span><input class="rnum" type="number" id="sumEvery" value="3" min="1" max="50" onchange="onInlineMetaChange()"><span class="wf-note">轮自动生成</span>
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="rnote">影响：顺序最稳定；主持人点名更可控；发言最少先更均衡；全员同时最快但更易冲突。</div>
-    </div>
-    <div class="adv-item" id="customOrderWrap" style="display:none">
-      <div class="rlg">
-        <span class="rl">自定义顺序</span>
-        <select class="rsel" id="customAgentSel"></select>
-        <button class="abtn" onclick="addCustomOrderFromSelect()">+ 添加</button>
-        <button class="abtn" onclick="clearCustomOrder()">清空</button>
-      </div>
-      <div class="co-list" id="customOrderList"></div>
-      <div class="rnote">支持同一 Agent 在一个回合多次发言。可拖动头像调整顺序，点 x 删除。</div>
-    </div>
-
-    <div class="adv-item complex-only" id="roundModeWrap">
-      <div class="rlg"><span class="rl">轮次模式</span>
-        <select class="rsel" id="roundMode" onchange="onRoundModeChange()">
-          <option value="fixed">固定轮次</option>
-          <option value="until_consensus">直到统一</option>
-        </select>
-      </div>
-      <div class="rnote">影响：固定轮次按指定轮数结束；直到统一会每轮检测共识，满足后提前结束。</div>
-    </div>
-
-    <div class="adv-item complex-only" id="roundFixedWrap">
-      <div class="rlg"><span class="rl">固定轮次</span><input class="rnum" type="number" id="roundsN" value="1" min="1" max="120"></div>
-      <div class="rnote">仅在“固定轮次”生效。数值越大讨论越充分，但耗时也更长。</div>
-    </div>
-
-    <div class="adv-item complex-only" id="roundCapWrap">
-      <div class="rlg"><span class="rl">统一上限</span><input class="rnum" type="number" id="roundCap" value="12" min="1" max="500"></div>
-      <div class="rnote">仅在“直到统一”生效。用于兜底防止长时间无法收敛。</div>
-    </div>
-
-    <div class="adv-item">
-      <div class="rlg"><span class="rl">讨论模式</span>
-        <select class="rsel" id="discMode"><option value="debate">辩论</option><option value="brainstorm">头脑风暴</option><option value="free">自由</option></select>
-      </div>
-      <div class="rnote">影响：辩论强调对抗和论证；头脑风暴更发散；自由模式居中。</div>
-    </div>
-
-    <div class="adv-item is-hidden" id="ctxAdvWrap">
-      <div class="rlg"><span class="rl">上下文策略</span>
-        <select class="rsel" id="ctxStrat"><option value="sliding">滑动窗口</option><option value="summary">摘要压缩</option><option value="full">完整历史</option></select>
-      </div>
-      <div class="rnote">影响：完整历史信息最全但最耗 token；滑动窗口更省；摘要压缩在两者之间。</div>
-    </div>
-
-    <div class="adv-item is-hidden" id="ctxWinAdvWrap">
-      <div class="rlg"><span class="rl">窗口大小</span><input class="rnum" type="number" id="ctxWin" value="10" min="3" max="40"></div>
-      <div class="rnote">仅在滑动窗口生效。越大越不易丢上下文，但 token 成本更高。</div>
-    </div>
-
-    <div class="adv-item is-hidden" id="sumAdvWrap">
-      <div class="rlg"><span class="rl">摘要策略</span>
-        <select class="rsel" id="sumAutoMode" onchange="onSumAutoModeChange()">
-          <option value="manual">手动</option>
-          <option value="rounds">每 N 轮自动</option>
-          <option value="topic_end">话题结束自动</option>
-        </select>
-        <span id="sumEveryWrap" style="display:none;align-items:center;gap:4px">
-          <input class="rnum" type="number" id="sumEvery" value="3" min="1" max="50"><span style="font-size:11px;color:var(--tx2)">轮</span>
-        </span>
-      </div>
-      <div class="rnote">手动：仅点击按钮生成；每 N 轮：讨论中自动更新；话题结束：收尾时自动生成共识/分歧摘要。</div>
     </div>
   </div>
 
@@ -787,7 +905,13 @@ button,input,select,textarea{font-size:14px}
   </div>
   <div class="ctrl-row">
     <div class="composer-icons">
-        <button class="icon-lite" title="发言设置" onclick="openSpeakModeMenu(this,event)">☰</button>
+        <button class="workflow-launch" title="讨论配置" onclick="toggleWorkflowDock()">
+          <span class="workflow-launch-icon">☰</span>
+          <span class="workflow-launch-copy">
+            <span class="workflow-launch-title">讨论配置</span>
+            <span class="workflow-launch-meta" id="workflowLaunchMeta">简单模式 · 快速文本</span>
+          </span>
+        </button>
     </div>
     <button class="btn pau" id="btnPause" onclick="togglePause()" style="display:none">⏸ 暂停</button>
     <button class="btn" id="btnCont" onclick="continueRound()" disabled>→ 继续</button>
@@ -861,7 +985,6 @@ button,input,select,textarea{font-size:14px}
       <button class="studio-nav" id="studioTab-models" onclick="switchStudioTab('models')">模型管理</button>
       <button class="studio-nav" id="studioTab-skills" onclick="switchStudioTab('skills')">技能管理</button>
       <button class="studio-nav" id="studioTab-agents" onclick="switchStudioTab('agents')">智能体管理</button>
-      <button class="studio-nav" id="studioTab-workflow" onclick="switchStudioTab('workflow')">发言策略</button>
       <div style="margin-top:auto;display:flex;gap:6px;flex-wrap:wrap">
         <button class="btn pri" onclick="document.getElementById('studioModal').style.display='none';showNav('home')">关闭</button>
       </div>
@@ -999,82 +1122,6 @@ button,input,select,textarea{font-size:14px}
         </div>
       </div>
 
-      <div id="studioSec-workflow" class="studio-pane">
-        <div class="studio-config studio-scroll" style="height:100%">
-          <div class="studio-detail-head">
-            <div>
-              <div class="studio-detail-title">发言策略</div>
-              <div class="studio-detail-sub">简单模式下，是否结束由主持人发出“会议最终闭环宣告”决定。高级模式下，可保存每个话题与整场讨论的最少/最多轮次，并指定发言顺序。</div>
-            </div>
-            <div class="studio-inline-actions">
-              <button class="btn" onclick="openPipelineModal()">流水线配置</button>
-            </div>
-          </div>
-          <div class="wf-mode-row">
-            <button class="wf-mode-btn" id="wfModeSimple" onclick="setWorkflowMode('simple')">简单模式</button>
-            <button class="wf-mode-btn" id="wfModeAdvanced" onclick="setWorkflowMode('advanced')">高级模式</button>
-          </div>
-          <div class="wf-section" id="wfSimpleCard">
-            <h4>简单模式</h4>
-            <p>简单模式只保留一个判断条件：主持人明确同意结束。没有固定轮次上限，也不会被自动共识判断截断。</p>
-            <div class="studio-note">适合你先跑真实体验，看主持人和其他智能体的完整讨论过程。</div>
-          </div>
-          <div id="wfAdvancedCard">
-            <div class="wf-grid" style="margin-top:10px">
-              <div class="wf-section">
-                <h4>每个话题轮次</h4>
-                <p>主持人提前闭环时，也必须先满足这里定义的最少轮次；超过最大轮次则自动结束当前话题。</p>
-                <div class="studio-form-grid">
-                  <div class="fld"><label>最少轮次</label><input id="wfTopicMin" type="number" min="1" max="99" onchange="saveWorkflowConfigFromEditor()"></div>
-                  <div class="fld"><label>最多轮次</label><input id="wfTopicMax" type="number" min="1" max="99" onchange="saveWorkflowConfigFromEditor()"></div>
-                </div>
-              </div>
-              <div class="wf-section">
-                <h4>整场讨论轮次</h4>
-                <p>用于给整场对话一个兜底区间。当前版本按本次对话累计轮次计算，不会无限空转。</p>
-                <div class="studio-form-grid">
-                  <div class="fld"><label>最少轮次</label><input id="wfTotalMin" type="number" min="1" max="199" onchange="saveWorkflowConfigFromEditor()"></div>
-                  <div class="fld"><label>最多轮次</label><input id="wfTotalMax" type="number" min="1" max="199" onchange="saveWorkflowConfigFromEditor()"></div>
-                </div>
-              </div>
-            </div>
-            <div class="wf-grid" style="margin-top:10px">
-              <div class="wf-section">
-                <h4>发言顺序</h4>
-                <p>高级模式下从这里保存顺序策略。自定义顺序支持同一智能体在一个回合中多次发言。</p>
-                <div class="fld">
-                  <label>顺序策略</label>
-                  <select id="wfTurnStrat" onchange="setWorkflowTurnStrategy(this.value)">
-                    <option value="seq">顺序轮转</option>
-                    <option value="mod">主持人点名</option>
-                    <option value="bid">发言最少先</option>
-                    <option value="all">全员同时</option>
-                    <option value="custom">自定义顺序</option>
-                  </select>
-                </div>
-                <div class="fld" style="margin-top:8px">
-                  <label>讨论风格</label>
-                  <select id="wfDiscMode" onchange="setWorkflowDiscMode(this.value)">
-                    <option value="debate">辩论</option>
-                    <option value="brainstorm">头脑风暴</option>
-                    <option value="free">自由</option>
-                  </select>
-                </div>
-              </div>
-              <div class="wf-section" id="wfCustomOrderWrap">
-                <h4>自定义顺序</h4>
-                <p>从当前可用智能体中添加发言位，再拖动调整顺序。</p>
-                <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
-                  <select id="wfCustomAgentSel" style="flex:1;min-width:180px;padding:7px 10px;background:var(--bg3);border:1px solid var(--bd2);border-radius:var(--r6);color:var(--tx0)"></select>
-                  <button class="abtn" onclick="addWorkflowCustomOrder()">+ 添加</button>
-                  <button class="abtn" onclick="clearWorkflowCustomOrder()">清空</button>
-                </div>
-                <div class="co-list" id="wfCustomOrderList" style="margin-top:10px"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </div>
@@ -1175,8 +1222,13 @@ const COLORS=[
   {hex:'#e03850',bg:'#280810',txt:'#ff8898'},{hex:'#d08020',bg:'#281604',txt:'#ffb850'},
   {hex:'#8838d0',bg:'#180830',txt:'#c880ff'},{hex:'#18a8d0',bg:'#061820',txt:'#60d8f8'},
 ];
-const APP_VERSION='0.1.4';
+const APP_VERSION='0.1.5';
 const UPDATE_NOTES={
+  '0.1.5':[
+    '讨论配置区重做为内联工作流面板：左侧简介，右侧表格式配置，替代原来的小下拉菜单。',
+    '高级发言策略从设置中心迁回主工作区：轮次、顺序、上下文和摘要策略现在都在同一处直接编辑。',
+    '底部入口改为“讨论配置”摘要按钮，当前模式和本次产物一眼可见。'
+  ],
   '0.1.4':[
     '模型页去冗余：移除常用预设和重复说明，保留核心配置字段。',
     '新增“匹配模型”：可按当前 Base URL + API Key 拉取可用模型并一键填入 Model ID。',
@@ -1487,12 +1539,17 @@ function renderArtifactModeBadge(){
   pendingArtifactMode_=normalizeArtifactMode(pendingArtifactMode_);
   const badge=document.getElementById('artifactModeBadge');
   if(badge)badge.textContent=artifactModeMeta(pendingArtifactMode_).short;
+  renderWorkflowSettings();
 }
 function setPendingArtifactMode(mode,silent){
   pendingArtifactMode_=normalizeArtifactMode(mode);
   localStorage.setItem('mix_pending_artifact_mode_v1',pendingArtifactMode_);
   renderArtifactModeBadge();
   document.getElementById('cdrop').style.display='none';
+  if(!silent){
+    syncProjectSnapshot();
+    syncTeamSnapshot();
+  }
 }
 function openArtifactModeMenu(btn,ev){
   ev?.stopPropagation();
@@ -2923,27 +2980,49 @@ function renderWorkflowCustomOrder(){
   list.innerHTML=chips||'<div class="co-empty">顺序为空：请点击 + 添加发言位</div>';
 }
 function renderWorkflowSettings(){
-  const simpleBtn=document.getElementById('wfModeSimple');
-  const advBtn=document.getElementById('wfModeAdvanced');
-  const advCard=document.getElementById('wfAdvancedCard');
-  const simpleCard=document.getElementById('wfSimpleCard');
+  const simpleCard=document.getElementById('wfModeSimple');
+  const advCard=document.getElementById('wfModeAdvanced');
+  const simpleBtn=document.getElementById('wfModeSimpleBtn');
+  const advBtn=document.getElementById('wfModeAdvancedBtn');
+  if(simpleCard)simpleCard.classList.toggle('on',simpleMode_);
+  if(advCard)advCard.classList.toggle('on',!simpleMode_);
   if(simpleBtn)simpleBtn.classList.toggle('on',simpleMode_);
   if(advBtn)advBtn.classList.toggle('on',!simpleMode_);
-  if(simpleCard)simpleCard.style.display=simpleMode_?'block':'none';
-  if(advCard)advCard.style.display=simpleMode_?'none':'block';
   const topicMin=document.getElementById('wfTopicMin');
   const topicMax=document.getElementById('wfTopicMax');
   const totalMin=document.getElementById('wfTotalMin');
   const totalMax=document.getElementById('wfTotalMax');
-  const turnStrat=document.getElementById('wfTurnStrat');
-  const discMode=document.getElementById('wfDiscMode');
+  const turnStrat=document.getElementById('turnStrat');
+  const discMode=document.getElementById('discMode');
   if(topicMin)topicMin.value=workflowCfg_.topicMin;
   if(topicMax)topicMax.value=workflowCfg_.topicMax;
   if(totalMin)totalMin.value=workflowCfg_.totalMin;
   if(totalMax)totalMax.value=workflowCfg_.totalMax;
-  if(turnStrat)turnStrat.value=document.getElementById('turnStrat')?.value||workflowCfg_.turnStrategy;
-  if(discMode)discMode.value=document.getElementById('discMode')?.value||workflowCfg_.discMode;
-  renderWorkflowCustomOrder();
+  if(turnStrat)turnStrat.value=workflowCfg_.turnStrategy;
+  if(discMode)discMode.value=workflowCfg_.discMode;
+  document.querySelectorAll('.wf-row-complex').forEach(n=>n.classList.toggle('is-hidden',simpleMode_));
+  const simpleLabel=simpleMode_?'简单模式':'高级模式';
+  const artMeta=artifactModeMeta(pendingArtifactMode_);
+  const launchMeta=document.getElementById('workflowLaunchMeta');
+  const sumPill=document.getElementById('workflowSummaryPill');
+  const artBrief=document.getElementById('workflowArtifactBrief');
+  const briefMeta=document.getElementById('workflowBriefMeta');
+  if(launchMeta)launchMeta.textContent=`${simpleLabel} · ${artMeta.label}`;
+  if(sumPill)sumPill.textContent=`${simpleLabel} · ${artMeta.label}`;
+  if(artBrief)artBrief.textContent=artMeta.label;
+  if(briefMeta){
+    const stratLabel={seq:'顺序轮转',mod:'主持人点名',bid:'发言最少先',all:'全员同时',custom:'自定义顺序'}[workflowCfg_.turnStrategy]||workflowCfg_.turnStrategy;
+    briefMeta.textContent=simpleMode_
+      ?`当前只保留主持人闭环条件。本次产物为“${artMeta.label}”，发出去后会恢复到默认快速文本。`
+      :`当前按“${stratLabel}”推进；话题 ${workflowCfg_.topicMin}-${workflowCfg_.topicMax} 轮，整场 ${workflowCfg_.totalMin}-${workflowCfg_.totalMax} 轮。`;
+  }
+  ['quick_text','single_file','multi_file','project_file'].forEach(key=>{
+    document.getElementById('artifactMode-'+key)?.classList.toggle('on',pendingArtifactMode_===key);
+  });
+  renderCustomOrderBuilder();
+  onRoundModeChange();
+  onSumAutoModeChange();
+  onInlineMetaChange(true);
 }
 function saveWorkflowConfigFromEditor(){
   workflowCfg_=normalizeWorkflowCfg({
@@ -2976,6 +3055,7 @@ function setWorkflowDiscMode(value){
   if(sel)sel.value=value||'debate';
   workflowCfg_.discMode=sel?.value||'debate';
   saveWorkflowCfg();
+  renderWorkflowSettings();
   syncProjectSnapshot();
   syncTeamSnapshot();
 }
@@ -2997,7 +3077,7 @@ function renderCustomOrderBuilder(){
   renderCustomAgentSelect();
   const wrap=document.getElementById('customOrderWrap');
   const isCustom=(document.getElementById('turnStrat')?.value||'seq')==='custom';
-  if(wrap)wrap.style.display=isCustom?'flex':'none';
+  if(wrap)wrap.classList.toggle('is-hidden',simpleMode_||!isCustom);
   const list=document.getElementById('customOrderList');
   if(!list)return;
   const actMap=new Map(getActive().map(a=>[a.id,a]));
@@ -3175,32 +3255,12 @@ function showCaptureDrop(msgId,btn,ev){
 function doCap(msgId,fileId){const m=messages.find(x=>x.id===msgId);if(!m)return;captureToFile(fileId,m.content);document.getElementById('cdrop').style.display='none';appendSysMsg('📌 已截取到文件');}
 function openSpeakModeMenu(btn,ev){
   ev?.stopPropagation();
-  const drop=document.getElementById('cdrop');
-  if(drop.dataset.mode==='speak'&&drop.style.display!=='none'){
-    drop.style.display='none';
-    return;
-  }
-  drop.dataset.mode='speak';
-  drop.dataset.key='speak';
-  const simpleOn=!!document.getElementById('simpleMode')?.checked;
-  drop.innerHTML=[
-    `<button class="cdrop-item" onclick="setSpeakMode('simple',true)">${simpleOn?'✅ ':''}简单模式<div style="font-size:11px;color:var(--tx2);margin-top:2px">主持人发出“会议最终闭环宣告”即结束。</div></button>`,
-    `<button class="cdrop-item" onclick="setSpeakMode('advanced',true)">${simpleOn?'':'✅ '}高级模式<div style="font-size:11px;color:var(--tx2);margin-top:2px">直接展开高级设置，配置轮次、顺序和讨论策略。</div></button>`,
-    '<div class="divider"></div>',
-    '<button class="cdrop-item" onclick="openArtifactModeMenu(this,event)">本次产物模式<div style="font-size:11px;color:var(--tx2);margin-top:2px">快速文本 / 单文件 / 多文件 / 工程文件</div></button>'
-  ].join('');
-  const r=btn.getBoundingClientRect();
-  drop.style.top=Math.max(6,r.top-188)+'px';
-  drop.style.left=r.left+'px';
-  drop.style.display='flex';
+  toggleWorkflowDock();
 }
 function setSpeakMode(mode,openConfig){
   if(mode==='simple')onSimpleModeChange(true);
   else onSimpleModeChange(false);
-  if(openConfig){
-    if(mode==='advanced')toggleAdv(true);
-    else toggleAdv(false);
-  }
+  if(openConfig)toggleWorkflowDock(true);
   document.getElementById('cdrop').style.display='none';
 }
 
@@ -3713,11 +3773,25 @@ function switchMode(m){
   refreshTopicViews();
 }
 
+function toggleWorkflowDock(forceOpen){
+  const p=document.getElementById('workflowDock');
+  if(!p)return;
+  const next=(typeof forceOpen==='boolean')?!!forceOpen:!p.classList.contains('on');
+  p.classList.toggle('on',next);
+  localStorage.setItem('mix_workflow_dock_open_v1',next?'1':'0');
+  if(next)renderWorkflowSettings();
+}
 function toggleAdv(forceOpen){
-  const p=document.getElementById('advPanel');
-  const open=(typeof forceOpen==='boolean')?!forceOpen:(p.style.display!=='none');
-  p.style.display=open?'none':'flex';
-  document.getElementById('advToggle').textContent=open?'⚙ 高级设置 ▸':'⚙ 高级设置 ▾';
+  toggleWorkflowDock(forceOpen);
+}
+function onInlineMetaChange(silent){
+  const ctxStrat=document.getElementById('ctxStrat');
+  const ctxWinWrap=document.getElementById('ctxWinAdvWrap');
+  if(ctxWinWrap)ctxWinWrap.classList.toggle('is-hidden',(ctxStrat?.value||'sliding')!=='sliding');
+  if(!silent){
+    syncProjectSnapshot();
+    syncTeamSnapshot();
+  }
 }
 
 function switchRPTab(t){rightTab=t;['files','queue','mem'].forEach(x=>{document.getElementById('rpt-'+x)?.classList.toggle('on',x===t);});document.getElementById('rpAdd').style.display=t==='files'?'':'none';renderRightPanel();}
@@ -5071,7 +5145,8 @@ let studioModelBlank_=false;
 let studioAgentBlank_=false;
 function switchStudioTab(tab){
   studioTab_=tab||studioTab_||'models';
-  ['models','skills','agents','workflow'].forEach(k=>{
+  if(studioTab_==='workflow')studioTab_='models';
+  ['models','skills','agents'].forEach(k=>{
     const sec=document.getElementById('studioSec-'+k);
     if(sec)sec.classList.toggle('on',k===studioTab_);
     const btn=document.getElementById('studioTab-'+k);
@@ -5080,7 +5155,6 @@ function switchStudioTab(tab){
   if(studioTab_==='models')renderModelCards();
   if(studioTab_==='skills')renderStudioSkillNames();
   if(studioTab_==='agents')renderStudioAgentNames();
-  if(studioTab_==='workflow')renderWorkflowSettings();
 }
 function renderStudioModelNames(){
   renderModelCards();
@@ -5231,6 +5305,8 @@ applyWorkflowCfg(workflowCfg_);
 renderArtifactModeBadge();
 document.getElementById('simpleMode').checked=simpleMode_;
 onSimpleModeChange(simpleMode_);
+renderWorkflowSettings();
+toggleWorkflowDock((localStorage.getItem('mix_workflow_dock_open_v1')||'0')==='1');
 initTeamState();
 initProjectState();
 ensureDefaultRoom();
@@ -5238,6 +5314,7 @@ announceVersionUpdateIfNeeded();
 ensureSkillHubPresetPack();
 setupDesktopUpdater();
 onSumAutoModeChange();
+onInlineMetaChange(true);
 renderAgents();
 renderRightPanel();
 refreshTopicViews();
