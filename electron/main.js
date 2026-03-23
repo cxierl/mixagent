@@ -4,20 +4,42 @@ const path = require('path');
 
 let mainWindow = null;
 let updaterInitialized = false;
+let updateAuthToken = (process.env.GH_TOKEN || '').trim();
 let updaterState = {
   status: 'idle',
   message: '',
   version: app.getVersion(),
   targetVersion: '',
-  progress: 0
+  progress: 0,
+  hasToken: !!updateAuthToken
 };
 let lastUpdateCheckAt = 0;
 let updateCheckInFlight = false;
 
 function sendUpdaterState(patch = {}) {
-  updaterState = { ...updaterState, ...patch };
+  updaterState = { ...updaterState, ...patch, hasToken: !!updateAuthToken };
   if (!mainWindow || mainWindow.isDestroyed()) return;
   mainWindow.webContents.send('mix-update-status', updaterState);
+}
+
+function applyUpdateToken(token) {
+  updateAuthToken = String(token || '').trim();
+  autoUpdater.requestHeaders = updateAuthToken
+    ? { Authorization: `Bearer ${updateAuthToken}` }
+    : {};
+  sendUpdaterState();
+}
+
+function sanitizeUpdaterError(error) {
+  let msg = String(error?.message || error || '更新失败。');
+  if (/releases\.atom/i.test(msg) && /\b404\b/.test(msg)) {
+    return '更新检查失败：当前仓库为私有仓库，请先配置 GitHub Token（需要 repo 权限）。';
+  }
+  msg = msg.replace(/Headers:\s*\{[\s\S]*$/i, '');
+  msg = msg.replace(/(authorization|cookie|set-cookie)\s*[:=][^,\n]*/gi, '');
+  msg = msg.replace(/\s+/g, ' ').trim();
+  if (msg.length > 220) msg = `${msg.slice(0, 220)}...`;
+  return msg || '更新失败。';
 }
 
 function canCheckUpdates(force = false) {
@@ -53,10 +75,10 @@ async function checkForUpdates(force = false) {
   } catch (error) {
     sendUpdaterState({
       status: 'error',
-      message: error?.message || '检查更新失败。',
+      message: sanitizeUpdaterError(error),
       progress: 0
     });
-    return { ok: false, reason: 'error', error: error?.message || String(error) };
+    return { ok: false, reason: 'error', error: sanitizeUpdaterError(error) };
   } finally {
     updateCheckInFlight = false;
   }
@@ -68,6 +90,7 @@ function setupAutoUpdater() {
 
   autoUpdater.autoDownload = false;
   autoUpdater.autoInstallOnAppQuit = true;
+  applyUpdateToken(updateAuthToken);
 
   autoUpdater.on('checking-for-update', () => {
     sendUpdaterState({
@@ -98,7 +121,7 @@ function setupAutoUpdater() {
   autoUpdater.on('error', (error) => {
     sendUpdaterState({
       status: 'error',
-      message: error?.message || '更新失败。',
+      message: sanitizeUpdaterError(error),
       progress: 0
     });
   });
@@ -170,6 +193,10 @@ ipcMain.on('mix-win-control', (event, action) => {
 
 ipcMain.handle('mix-update-get-state', async () => updaterState);
 ipcMain.handle('mix-update-check', async (_event, force = true) => checkForUpdates(Boolean(force)));
+ipcMain.handle('mix-update-set-token', async (_event, token = '') => {
+  applyUpdateToken(token);
+  return { ok: true, hasToken: !!updateAuthToken };
+});
 ipcMain.handle('mix-update-download', async () => {
   if (!app.isPackaged) return { ok: false, reason: 'dev' };
   try {
@@ -183,10 +210,10 @@ ipcMain.handle('mix-update-download', async () => {
   } catch (error) {
     sendUpdaterState({
       status: 'error',
-      message: error?.message || '下载更新失败。',
+      message: sanitizeUpdaterError(error),
       progress: 0
     });
-    return { ok: false, error: error?.message || String(error) };
+    return { ok: false, error: sanitizeUpdaterError(error) };
   }
 });
 ipcMain.handle('mix-update-install', async () => {

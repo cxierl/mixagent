@@ -602,6 +602,7 @@ button,input,select,textarea{font-size:14px}
   <div class="update-actions">
     <button class="update-btn" id="updateLaterBtn" onclick="dismissUpdateBar()" style="display:none">稍后</button>
     <button class="update-btn" id="updateRetryBtn" onclick="checkDesktopUpdates(true)" style="display:none">重试</button>
+    <button class="update-btn" id="updateTokenBtn" onclick="configureUpdateToken()" style="display:none">配置令牌</button>
     <button class="update-btn pri" id="updateActionBtn" onclick="handleUpdateAction()" style="display:none">下载更新</button>
     <button class="update-close" id="updateCloseBtn" onclick="dismissUpdateBar()" style="display:none">✕</button>
   </div>
@@ -1180,8 +1181,13 @@ const COLORS=[
   {hex:'#e03850',bg:'#280810',txt:'#ff8898'},{hex:'#d08020',bg:'#281604',txt:'#ffb850'},
   {hex:'#8838d0',bg:'#180830',txt:'#c880ff'},{hex:'#18a8d0',bg:'#061820',txt:'#60d8f8'},
 ];
-const APP_VERSION='0.1.2';
+const APP_VERSION='0.1.3';
 const UPDATE_NOTES={
+  '0.1.3':[
+    '修复私有仓库自动更新：支持在应用内配置 GitHub Token（repo 权限）。',
+    '修复更新错误泄露请求头问题：更新错误消息已做敏感信息脱敏。',
+    '更新提示条新增“配置令牌”入口，配置后可立即重试更新。'
+  ],
   '0.1.2':[
     '新增桌面端自动更新提示：启动后自动检查新版本，发现更新后可直接下载。',
     '新增更新进度条：下载过程中实时显示百分比，完成后可一键重启安装。',
@@ -1579,6 +1585,7 @@ function renderDesktopUpdateBar(){
   const fill=document.getElementById('updateProgressFill');
   const actionBtn=document.getElementById('updateActionBtn');
   const retryBtn=document.getElementById('updateRetryBtn');
+  const tokenBtn=document.getElementById('updateTokenBtn');
   const laterBtn=document.getElementById('updateLaterBtn');
   const closeBtn=document.getElementById('updateCloseBtn');
   const state=desktopUpdateState_||{};
@@ -1592,6 +1599,7 @@ function renderDesktopUpdateBar(){
   fill.style.width=`${Math.max(0,Math.min(100,state.progress||0))}%`;
   actionBtn.style.display='none';
   retryBtn.style.display='none';
+  tokenBtn.style.display='none';
   laterBtn.style.display='none';
   closeBtn.style.display='inline-flex';
   if(status==='available'){
@@ -1604,10 +1612,22 @@ function renderDesktopUpdateBar(){
     laterBtn.style.display='inline-flex';
   }else if(status==='error'){
     retryBtn.style.display='inline-flex';
+    if(!state.hasToken || /私有仓库|token|Token/i.test(state.message||''))tokenBtn.style.display='inline-flex';
     laterBtn.style.display='inline-flex';
   }else if(status==='checking' || status==='downloading'){
     laterBtn.style.display='inline-flex';
   }
+}
+async function configureUpdateToken(){
+  const cur=(localStorage.getItem('mix_update_token_v1')||'').trim();
+  const token=prompt('请输入 GitHub Token（需要 repo 权限，用于私有仓库更新）',cur);
+  if(token===null)return;
+  const next=String(token||'').trim();
+  localStorage.setItem('mix_update_token_v1',next);
+  if(window.mixDesktop&&typeof window.mixDesktop.setUpdateToken==='function'){
+    try{await window.mixDesktop.setUpdateToken(next);}catch{}
+  }
+  checkDesktopUpdates(true);
 }
 async function handleUpdateAction(){
   try{
@@ -1639,6 +1659,8 @@ async function checkDesktopUpdates(force=false){
 async function setupDesktopUpdater(){
   if(!window.mixDesktop||typeof window.mixDesktop.getUpdateState!=='function')return;
   try{
+    const savedToken=(localStorage.getItem('mix_update_token_v1')||'').trim();
+    if(typeof window.mixDesktop.setUpdateToken==='function')await window.mixDesktop.setUpdateToken(savedToken);
     if(typeof desktopUpdateUnsub_==='function')desktopUpdateUnsub_();
     desktopUpdateUnsub_=window.mixDesktop.onUpdateStatus((state)=>{
       desktopUpdateState_={...desktopUpdateState_,...(state||{})};

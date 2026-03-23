@@ -6,6 +6,7 @@ contextBridge.exposeInMainWorld('mixDesktop', {
   maximizeToggle: () => ipcRenderer.send('mix-win-control', 'maximize-toggle'),
   close: () => ipcRenderer.send('mix-win-control', 'close'),
   getUpdateState: () => ipcRenderer.invoke('mix-update-get-state'),
+  setUpdateToken: (token = '') => ipcRenderer.invoke('mix-update-set-token', token),
   checkForUpdates: (force = true) => ipcRenderer.invoke('mix-update-check', force),
   downloadUpdate: () => ipcRenderer.invoke('mix-update-download'),
   installUpdate: () => ipcRenderer.invoke('mix-update-install'),
