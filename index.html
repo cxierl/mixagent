@@ -209,49 +209,49 @@ input::placeholder,textarea::placeholder{color:var(--tx3)}
 /* workflow dock */
 .workflow-dock{display:none;padding:10px 12px 0}
 .workflow-dock.on{display:block;animation:fin .18s ease}
-.workflow-shell{display:grid;grid-template-columns:minmax(240px,280px) minmax(0,1fr);border:1px solid var(--bd);border-radius:16px;background:linear-gradient(180deg,rgba(22,33,52,.98),rgba(12,19,32,.98));box-shadow:0 18px 50px rgba(0,0,0,.28);overflow:hidden}
-.workflow-intro{padding:18px 18px 16px;border-right:1px solid var(--bd);background:linear-gradient(180deg,rgba(28,42,66,.92),rgba(15,23,38,.96));display:flex;flex-direction:column;gap:12px}
+.workflow-shell{display:grid;grid-template-columns:minmax(230px,260px) minmax(0,1fr);border:1px solid var(--bd);border-radius:16px;background:var(--bg1);box-shadow:0 14px 34px rgba(0,0,0,.22);overflow:hidden}
+.workflow-intro{padding:18px 18px 16px;border-right:1px solid var(--bd);background:linear-gradient(180deg,rgba(24,29,37,.96),rgba(17,22,29,.98));display:flex;flex-direction:column;gap:12px}
 .workflow-kicker{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--tx2)}
 .workflow-title{font-size:18px;font-weight:800;line-height:1.2;color:var(--tx0)}
 .workflow-lead{font-size:12px;line-height:1.75;color:var(--tx1)}
 .workflow-brief-list{display:flex;flex-direction:column;gap:8px}
-.workflow-brief-card{padding:12px 13px;border:1px solid var(--bd2);border-radius:12px;background:rgba(13,23,38,.55);transition:border-color .14s ease,background .14s ease,transform .14s ease}
+.workflow-brief-card{padding:12px 13px;border:1px solid #353d49;border-radius:12px;background:#1d2128;transition:border-color .14s ease,background .14s ease,transform .14s ease}
 .workflow-brief-card.clickable{cursor:pointer}
-.workflow-brief-card.clickable:hover{border-color:var(--bd3);transform:translateY(-1px)}
-.workflow-brief-card.on{border-color:var(--acc);background:rgba(20,43,77,.72);box-shadow:0 0 0 1px rgba(59,130,246,.16)}
+.workflow-brief-card.clickable:hover{border-color:#5e697a;transform:translateY(-1px)}
+.workflow-brief-card.on{border-color:#7a8597;background:#262c35;box-shadow:0 0 0 1px rgba(255,255,255,.04)}
 .workflow-brief-label{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:13px;font-weight:700;color:var(--tx0)}
 .workflow-brief-desc{margin-top:4px;font-size:11px;line-height:1.65;color:var(--tx2)}
-.workflow-brief-meta{margin-top:auto;padding-top:6px;font-size:11px;line-height:1.75;color:var(--tx2)}
-.workflow-config{padding:12px 14px 14px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.workflow-brief-meta{margin-top:auto;padding-top:8px;font-size:11px;line-height:1.75;color:var(--tx2);border-top:1px solid rgba(72,82,99,.55)}
+.workflow-config{padding:12px 14px 14px;display:flex;flex-direction:column;gap:10px;min-width:0;background:#151a21}
 .workflow-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;padding:2px 2px 8px}
 .workflow-head-copy{display:flex;flex-direction:column;gap:3px}
 .workflow-head-title{font-size:16px;font-weight:800;color:var(--tx0)}
 .workflow-head-sub{font-size:12px;line-height:1.7;color:var(--tx2)}
-.workflow-summary-pill{padding:6px 10px;border-radius:999px;border:1px solid var(--bd2);background:var(--bg2);font-size:11px;color:var(--tx1);white-space:nowrap}
-.workflow-table{display:flex;flex-direction:column;border:1px solid var(--bd);border-radius:14px;background:rgba(10,17,29,.35);overflow:hidden}
-.wf-row{display:grid;grid-template-columns:156px 220px minmax(0,1fr);gap:12px;padding:12px 14px;border-bottom:1px solid rgba(47,67,102,.72);align-items:flex-start}
+.workflow-summary-pill{padding:6px 10px;border-radius:999px;border:1px solid #39414d;background:#1c2129;font-size:11px;color:var(--tx1);white-space:nowrap}
+.workflow-table{display:flex;flex-direction:column;border:1px solid #333b46;border-radius:14px;background:#11161d;overflow:hidden}
+.wf-row{display:grid;grid-template-columns:148px 216px minmax(0,1fr);gap:12px;padding:12px 14px;border-bottom:1px solid #2b323d;align-items:flex-start}
 .wf-row:last-child{border-bottom:none}
 .wf-cell-label{font-size:12px;font-weight:700;color:var(--tx0);padding-top:3px}
 .wf-cell-desc{font-size:11px;line-height:1.65;color:var(--tx2)}
 .wf-cell-control{display:flex;flex-wrap:wrap;gap:8px;align-items:center;min-width:0}
 .wf-inline-pair{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.wf-seg{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--bd);border-radius:10px;background:var(--bg0)}
+.wf-seg{display:inline-flex;gap:2px;padding:3px;border:1px solid #3a414d;border-radius:10px;background:#1b2027}
 .wf-seg button{padding:7px 12px;border-radius:8px;background:transparent;color:var(--tx1);border:1px solid transparent;font-size:12px;font-weight:700}
-.wf-seg button.on{background:var(--bg3);border-color:var(--bd2);color:var(--tx0)}
+.wf-seg button.on{background:#2b313b;border-color:#5d6675;color:var(--tx0)}
 .wf-chip-group{display:flex;flex-wrap:wrap;gap:8px}
-.wf-chip{display:flex;flex-direction:column;gap:2px;min-width:120px;padding:9px 11px;border-radius:12px;border:1px solid var(--bd2);background:var(--bg2);color:var(--tx1);text-align:left}
-.wf-chip:hover{border-color:var(--bd3);color:var(--tx0)}
-.wf-chip.on{border-color:var(--acc);background:rgba(20,43,77,.72);color:var(--tx0)}
+.wf-chip{display:flex;flex-direction:column;gap:2px;min-width:132px;padding:9px 11px;border-radius:12px;border:1px solid #3a414d;background:#1e232b;color:var(--tx1);text-align:left}
+.wf-chip:hover{border-color:#687383;color:var(--tx0)}
+.wf-chip.on{border-color:#8a93a3;background:#2a3039;color:var(--tx0)}
 .wf-chip-title{font-size:12px;font-weight:700}
 .wf-chip-desc{font-size:10px;line-height:1.45;color:var(--tx2)}
-.wf-stat{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border-radius:9px;background:var(--bg2);border:1px solid var(--bd);font-size:11px;color:var(--tx2)}
+.wf-stat{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border-radius:9px;background:#232931;border:1px solid #363e4a;font-size:11px;color:var(--tx2)}
 .wf-note{font-size:10px;line-height:1.55;color:var(--tx3)}
 .wf-row .rsel,.wf-row .rnum{min-height:34px}
 .wf-row .rnum{width:72px}
 .wf-row-complex.is-hidden,.wf-row.is-hidden{display:none!important}
-.workflow-launch{display:inline-flex;align-items:center;gap:10px;padding:7px 12px;border-radius:12px;background:linear-gradient(180deg,rgba(28,42,66,.95),rgba(18,28,46,.98));border:1px solid var(--bd2);color:var(--tx0);min-width:188px}
-.workflow-launch:hover{border-color:var(--bd3);background:linear-gradient(180deg,rgba(33,50,78,.98),rgba(20,31,52,.98))}
-.workflow-launch-icon{width:26px;height:26px;border-radius:8px;background:var(--bg3);border:1px solid var(--bd2);display:inline-flex;align-items:center;justify-content:center;font-size:13px;color:var(--tx1);flex-shrink:0}
+.workflow-launch{display:inline-flex;align-items:center;gap:10px;padding:7px 12px;border-radius:12px;background:#222830;border:1px solid #39414d;color:var(--tx0);min-width:188px}
+.workflow-launch:hover{border-color:#5f6978;background:#2a313a}
+.workflow-launch-icon{width:26px;height:26px;border-radius:8px;background:#2b313b;border:1px solid #444d5a;display:inline-flex;align-items:center;justify-content:center;font-size:13px;color:var(--tx1);flex-shrink:0}
 .workflow-launch-copy{display:flex;flex-direction:column;align-items:flex-start;gap:1px;min-width:0}
 .workflow-launch-title{font-size:12px;font-weight:700;color:var(--tx0)}
 .workflow-launch-meta{font-size:10px;color:var(--tx2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:170px}
@@ -286,6 +286,7 @@ input::placeholder,textarea::placeholder{color:var(--tx3)}
 .btn.pau{background:#2b2108;color:var(--amb);border-color:var(--amb)77}.btn.pau.res{background:#0d2a18;color:var(--grn);border-color:var(--grn)77}
 .btn.ghost{background:transparent;border-color:var(--bd3);color:var(--tx1)}
 .btn.ghost:hover{background:var(--bg2);color:var(--tx0)}
+.btn:focus-visible,.abtn:focus-visible,.workflow-launch:focus-visible,.wf-chip:focus-visible,.wf-seg button:focus-visible,.room-icon-btn:focus-visible,.win-btn:focus-visible,.tbtn:focus-visible{outline:2px solid rgba(96,216,248,.75);outline-offset:2px}
 .composer-icons{display:flex;gap:6px;align-items:center}
 .icon-lite{width:28px;height:28px;border-radius:8px;background:var(--bg3);border:1px solid var(--bd2);color:var(--tx1);font-size:14px;padding:0}
 .icon-lite:hover{color:var(--tx0);border-color:var(--bd3)}
@@ -696,7 +697,7 @@ button,input,select,textarea{font-size:14px}
           <button class="abtn" id="chatArtifactExportBtn" onclick="exportLatestArtifact()">导出</button>
         </div>
         <span class="sp"></span>
-        <button class="abtn" id="chatEditMembersBtn" onclick="openRoomAgentModal()">编辑群成员</button>
+        <button class="abtn" id="chatEditMembersBtn" onclick="openRoomAgentEditor()">编辑群成员</button>
       </div>
     </div>
     <div class="chat-msgs" id="chatMsgs">
@@ -748,9 +749,9 @@ button,input,select,textarea{font-size:14px}
     <input type="checkbox" id="simpleMode" hidden onchange="onSimpleModeChange()">
     <div class="workflow-shell">
       <div class="workflow-intro">
-        <div class="workflow-kicker">Workflow</div>
-        <div class="workflow-title">讨论策略与产物在这里一次配清。</div>
-        <div class="workflow-lead">左边负责解释当前模式与结果形态，右边直接改值。设置中心里的发言策略不再作为第二入口，避免两处配置打架。</div>
+        <div class="workflow-kicker">讨论配置</div>
+        <div class="workflow-title">先选发言模式，再细调本次运行。</div>
+        <div class="workflow-lead">左侧只保留两种发言模式说明，右侧按当前模式展示对应配置。产物规格、顺序和记忆策略都在右侧统一编辑。</div>
         <div class="workflow-brief-list">
           <div class="workflow-brief-card clickable" id="wfModeSimple" onclick="setWorkflowMode('simple')">
             <div class="workflow-brief-label"><span>简单模式</span><span class="wf-stat">主持人闭环即结束</span></div>
@@ -759,10 +760,6 @@ button,input,select,textarea{font-size:14px}
           <div class="workflow-brief-card clickable" id="wfModeAdvanced" onclick="setWorkflowMode('advanced')">
             <div class="workflow-brief-label"><span>高级模式</span><span class="wf-stat">轮次、顺序、记忆全可控</span></div>
             <div class="workflow-brief-desc">适合需要稳定产出、严格推进和长期复盘的任务。可控制每个话题与整场讨论的最少/最多轮次。</div>
-          </div>
-          <div class="workflow-brief-card" id="wfArtifactCard">
-            <div class="workflow-brief-label"><span>本次产物</span><span class="wf-stat" id="workflowArtifactBrief">快速文本</span></div>
-            <div class="workflow-brief-desc">这次命令只决定最终产物形态，不改变团队结构。命令发送后会自动回到默认“快速文本”。</div>
           </div>
         </div>
         <div class="workflow-brief-meta" id="workflowBriefMeta">当前策略将写入项目快照与团队快照，更新后仍可恢复。</div>
@@ -1222,8 +1219,13 @@ const COLORS=[
   {hex:'#e03850',bg:'#280810',txt:'#ff8898'},{hex:'#d08020',bg:'#281604',txt:'#ffb850'},
   {hex:'#8838d0',bg:'#180830',txt:'#c880ff'},{hex:'#18a8d0',bg:'#061820',txt:'#60d8f8'},
 ];
-const APP_VERSION='0.1.5';
+const APP_VERSION='0.1.6';
 const UPDATE_NOTES={
+  '0.1.6':[
+    '工作流面板重新收回主界面的深灰体系，展开按钮与面板颜色一致，不再出现偏蓝的割裂感。',
+    '工作流左侧只保留简单/高级两种主模式说明，右侧按当前模式显示对应配置，避免一展开把全部策略都堆出来。',
+    '“编辑群成员”现在可直接进入当前群聊成员的智能体编辑页，省去中间切换步骤。'
+  ],
   '0.1.5':[
     '讨论配置区重做为内联工作流面板：左侧简介，右侧表格式配置，替代原来的小下拉菜单。',
     '高级发言策略从设置中心迁回主工作区：轮次、顺序、上下文和摘要策略现在都在同一处直接编辑。',
@@ -3005,16 +3007,14 @@ function renderWorkflowSettings(){
   const artMeta=artifactModeMeta(pendingArtifactMode_);
   const launchMeta=document.getElementById('workflowLaunchMeta');
   const sumPill=document.getElementById('workflowSummaryPill');
-  const artBrief=document.getElementById('workflowArtifactBrief');
   const briefMeta=document.getElementById('workflowBriefMeta');
   if(launchMeta)launchMeta.textContent=`${simpleLabel} · ${artMeta.label}`;
   if(sumPill)sumPill.textContent=`${simpleLabel} · ${artMeta.label}`;
-  if(artBrief)artBrief.textContent=artMeta.label;
   if(briefMeta){
     const stratLabel={seq:'顺序轮转',mod:'主持人点名',bid:'发言最少先',all:'全员同时',custom:'自定义顺序'}[workflowCfg_.turnStrategy]||workflowCfg_.turnStrategy;
     briefMeta.textContent=simpleMode_
-      ?`当前只保留主持人闭环条件。本次产物为“${artMeta.label}”，发出去后会恢复到默认快速文本。`
-      :`当前按“${stratLabel}”推进；话题 ${workflowCfg_.topicMin}-${workflowCfg_.topicMax} 轮，整场 ${workflowCfg_.totalMin}-${workflowCfg_.totalMax} 轮。`;
+      ?`当前只保留主持人闭环条件。当前产物为“${artMeta.label}”，发出去后会恢复到默认快速文本。`
+      :`当前产物为“${artMeta.label}”；按“${stratLabel}”推进，话题 ${workflowCfg_.topicMin}-${workflowCfg_.topicMax} 轮，整场 ${workflowCfg_.totalMin}-${workflowCfg_.totalMax} 轮。`;
   }
   ['quick_text','single_file','multi_file','project_file'].forEach(key=>{
     document.getElementById('artifactMode-'+key)?.classList.toggle('on',pendingArtifactMode_===key);
@@ -5140,6 +5140,7 @@ let studioServiceFocus_='';
 let studioModelFocus_='';
 let studioSkillFocus_='';
 let studioAgentFocus_='';
+let studioAgentScope_='all';
 let studioServiceBlank_=false;
 let studioModelBlank_=false;
 let studioAgentBlank_=false;
@@ -5158,6 +5159,12 @@ function switchStudioTab(tab){
 }
 function renderStudioModelNames(){
   renderModelCards();
+}
+function getStudioAgentPool(){
+  if(studioAgentScope_!=='room')return [...agents];
+  if(isAssistantRoom())return [];
+  const ids=new Set((teamMemberIds_||[]).filter(id=>agents.some(a=>a.id===id)));
+  return agents.filter(a=>ids.has(a.id));
 }
 function renderStudioSkillNames(){
   const host=document.getElementById('studioSkillNames');
@@ -5220,13 +5227,15 @@ function renderStudioSkillNames(){
 function renderStudioAgentNames(){
   const host=document.getElementById('studioAgentNames');
   if(!host)return;
-  if(!agents.length){
-    host.innerHTML='<div class="studio-name-item">暂无智能体</div>';
-    newStudioAgent();
+  const scopedAgents=getStudioAgentPool();
+  if(!scopedAgents.length){
+    host.innerHTML=`<div class="studio-name-item">${studioAgentScope_==='room'?'当前群聊暂无可编辑成员':'暂无智能体'}</div>`;
+    if(studioAgentScope_!=='room')newStudioAgent();
+    else loadStudioAgentEditor('');
     return;
   }
-  if((!studioAgentFocus_||!agents.some(a=>a.id===studioAgentFocus_))&&!studioAgentBlank_)studioAgentFocus_=agents[0].id;
-  host.innerHTML=agents.map(a=>{
+  if((!studioAgentFocus_||!scopedAgents.some(a=>a.id===studioAgentFocus_))&&!studioAgentBlank_)studioAgentFocus_=scopedAgents[0].id;
+  host.innerHTML=scopedAgents.map(a=>{
     const model=modelStore.find(m=>m.id===a.modelId);
     return `<div class="studio-name-item ${studioAgentFocus_===a.id?'on':''}" onclick="focusStudioAgent('${a.id}')">
       <div>${a.name}</div>
@@ -5288,8 +5297,25 @@ function refreshStudioAgentMeta(){
 function toggleStudioFocusedAgentInTeam(){if(editingAgentId)toggleAgentInTeam(editingAgentId);}
 function toggleStudioFocusedAgentEnabled(){if(editingAgentId)togA(editingAgentId);}
 function deleteStudioFocusedAgent(){if(editingAgentId)delA(editingAgentId);}
-function openStudioModal(tab){
+function openRoomAgentEditor(){
+  if(!activeProjectId_){alert('请先创建或选择一个群聊项目。');return;}
+  if(isAssistantRoom()){alert('“智能助手”会话为单助手模式，不需要编辑群成员。');return;}
+  if(!ensureTeamForCurrentProject())return;
+  studioAgentScope_='room';
+  const scopedAgents=getStudioAgentPool();
+  if(scopedAgents.length){
+    studioAgentBlank_=false;
+    studioAgentFocus_=scopedAgents[0].id;
+  }else{
+    studioAgentBlank_=true;
+    studioAgentFocus_='';
+  }
+  openStudioModal('agents','room');
+}
+function openStudioModal(tab,agentScope){
   if(tab)studioTab_=tab;
+  if(agentScope)studioAgentScope_=agentScope;
+  else studioAgentScope_='all';
   showNav('home');
   renderStudioStatus();
   switchStudioTab(studioTab_);
