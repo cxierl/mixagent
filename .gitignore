@@ -5,3 +5,16 @@ _tmp_inline_check.js/
 *.log
 Thumbs.db
 .DS_Store
+
+# Python backend
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+dist/
+build/
+data/
+*.db

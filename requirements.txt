@@ -1,0 +1,8 @@
+# Runtime
+fastapi>=0.116.0
+uvicorn>=0.35.0
+
+# Development and testing
+pytest>=9.0.0
+pytest-cov>=7.0.0
+httpx>=0.28.0

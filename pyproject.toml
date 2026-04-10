@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "multi-agent-workflow-pro"
+version = "0.1.0"
+description = "Professional MVP of a multi-agent workflow engine"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.116.0",
+  "uvicorn>=0.35.0",
+]
+
+[tool.pytest.ini_options]
+addopts = "-q --cov=app --cov-report=term-missing --cov-fail-under=60"
+testpaths = ["tests"]
+
+[tool.coverage.run]
+branch = true
+source = ["app"]
+
+[tool.coverage.report]
+skip_empty = true
+show_missing = true
